@@ -1,0 +1,40 @@
+{
+  "name": "@mqnoy/lolog",
+  "description": "me and the logs.",
+  "version": "0.0.0",
+  "author": "imza <qnoy.rifky@gmail.com>",
+  "maintainers": [
+    "imza <qnoy.rifky@gmail.com>"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://https://github.com/mqnoy/lolog.git"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsup src/index.ts",
+    "example:basic": "tsx example/basic.ts",
+    "example:defaultFormat": "tsx example/defaultFormat.ts",
+    "example:elasticFormat": "tsx example/elasticFormat.ts"
+  },
+  "keywords": [
+    "logging",
+    "logger",
+    "logs"
+  ],
+  "license": "UNLICENSED",
+  "dependencies": {
+    "@elastic/ecs-winston-format": "^1.5.3",
+    "winston": "^3.17.0",
+    "winston-transport": "^4.9.0"
+  },
+  "devDependencies": {
+    "eslint": "^9.26.0",
+    "prettier": "^3.5.3",
+    "prettier-eslint": "^16.4.1",
+    "tsup": "^8.4.0",
+    "tsx": "^4.19.4",
+    "typescript": "^5.8.3"
+  }
+}
