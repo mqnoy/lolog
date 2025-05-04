@@ -1,46 +1,34 @@
 import { Format, Lolog, Transports } from "src";
 
-class HttpException extends Error {
-  status: number;
-
-  constructor(message: string, status: number) {
-    super(message);
-    this.name = this.constructor.name;
-    this.status = status;
-    this.stack = new Error().stack;
-  }
-}
-
 class App {
   private logger: Lolog;
   constructor() {
     this.logger = new Lolog({
       level: "debug",
       defaultMeta: { service: "APP" },
-      format: Format.DefaultFormat(),
+      format: Format.ElasticFormat(),
       transports: [Transports.ConsoleTransport()],
     });
   }
 
   dummyFunc = () => {
-    this.logger.setChild({ "request.id": "abc123" });
-    this.logger.info("test info");
-    this.logger.warn("test warn");
+    const logger = this.logger.setChild({ "request.id": "abc123" });
+    logger.info("test info");
+    logger.warn("test warn");
 
     try {
       throw new Error("Database connection failed");
     } catch (error: any) {
-      this.logger.debug("ada error di dummyFunc");
-      this.logger.error(error);
-      this.logger.error(error, { requestId: "abc123", userId: "u456" });
+      logger.debug("ada error di dummyFunc");
+      logger.error(error);
+      logger.error(error, { requestId: "abc123", userId: "u456" });
+    } finally {
+      this.dummyFunc2();
     }
+  };
 
-    try {
-      throw new HttpException("duarrr", 500);
-    } catch (error) {
-      this.logger.debug("ada error di dummyFunc");
-      this.logger.error(error, { data: [1, 2, 3], userId: "u456" });
-    }
+  dummyFunc2 = () => {
+    this.logger.debug("dummyFunc2");
   };
 }
 

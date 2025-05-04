@@ -49,17 +49,23 @@ class App {
   }
 
   dummyFunc = () => {
-    this.logger.setChild({ "request.id": "abc123" });
-    this.logger.info("test info");
-    this.logger.warn("test warn");
+    const logger = this.logger.setChild({ "request.id": "abc123" });
+    logger.info("test info");
+    logger.warn("test warn");
 
     try {
       throw new Error("Database connection failed");
     } catch (error) {
-      this.logger.debug("ada error di dummyFunc");
-      this.logger.error(error);
-      this.logger.error(error, { requestId: "abc123", userId: "u456" });
+      logger.debug("ada error di dummyFunc");
+      logger.error(error);
+      logger.error(error, { requestId: "abc123", userId: "u456" });
+    } finally {
+      this.dummyFunc2();
     }
+  };
+  
+  dummyFunc2 = () => {
+    this.logger.debug("dummyFunc2");
   };
 }
 
