@@ -27,8 +27,7 @@ export class Lolog {
   getInstanceLog = () => this.logger;
 
   setChild = (options: Object) => {
-    this.logger = this.logger.child(options);
-    return this;
+    return this.logger.child(options);
   };
 
   log = (level: LogLevel, message: string, meta?: Record<string, unknown>) => {
