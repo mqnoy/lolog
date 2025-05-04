@@ -35,7 +35,7 @@ export const PrintfFormat = (): winston.Logform.Format => {
         Object.keys(meta).length && `\nmeta: ${JSON.stringify(meta, null, 2)}`;
 
       return `[${timestamp}] [${level.toUpperCase()}]: ${message}${
-        stack && `\n${stack}`
+        stack ? `\n${stack}` : ""
       }${metaStr}`;
     }
   );
