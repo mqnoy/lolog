@@ -31,11 +31,7 @@ export class Lolog {
     return this;
   };
 
-  log = (
-    level: LogLevel,
-    message: string,
-    meta: Record<string, unknown> = {}
-  ) => {
+  log = (level: LogLevel, message: string, meta?: Record<string, unknown>) => {
     this.logger.log({
       level,
       message,
@@ -43,7 +39,7 @@ export class Lolog {
     } as LogEntry);
   };
 
-  error(message: string | Error, meta: Record<string, unknown> = {}) {
+  error(message: string | Error, meta?: Record<string, unknown>) {
     if (message instanceof Error) {
       this.log("error", message.message, {
         error: serializeError(message),
@@ -54,15 +50,15 @@ export class Lolog {
     }
   }
 
-  warn(message: string, meta: Record<string, unknown> = {}) {
+  warn(message: string, meta?: Record<string, unknown>) {
     this.log("warn", message, meta);
   }
 
-  info(message: string, meta: Record<string, unknown> = {}) {
+  info(message: string, meta?: Record<string, unknown>) {
     this.log("info", message, meta);
   }
 
-  debug(message: string, meta: Record<string, unknown> = {}) {
+  debug(message: string, meta?: Record<string, unknown>) {
     this.log("debug", message, meta);
   }
 }
