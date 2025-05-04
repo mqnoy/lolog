@@ -17,12 +17,55 @@ Available transports
 
 ## Usage
 ```
-this.logger = new Logger({
-      level: "debug",
+const { Format, Lolog, Transports } = require("@mqnoy/lolog");
+const path = require("path");
+
+const env = "dev";
+
+class App {
+  constructor() {
+    const format =
+      env === "local"
+        ? Format.DefaultFormat()
+        : Format.ElasticFormat({
+            serviceName: "AppChild",
+          });
+
+    this.logger = new Lolog({
+      level: "info",
       defaultMeta: { service: "APP" },
       format,
-      transports: [Transports.ConsoleTransport()],
+      transports: [
+        Transports.FileTransport({
+          filename: path.join(__dirname, "logs", "combined.log"),
+        }),
+        Transports.FileTransport({
+          filename: path.join(__dirname, "logs", "error.log"),
+          level: "error",
+        }),
+        Transports.ConsoleTransport(),
+      ],
     });
+  }
+
+  dummyFunc = () => {
+    this.logger.setChild({ "request.id": "abc123" });
+    this.logger.info("test info");
+    this.logger.warn("test warn");
+
+    try {
+      throw new Error("Database connection failed");
+    } catch (error) {
+      this.logger.debug("ada error di dummyFunc");
+      this.logger.error(error);
+      this.logger.error(error, { requestId: "abc123", userId: "u456" });
+    }
+  };
+}
+
+const app = new App();
+app.dummyFunc();
+
 ```
 
 
