@@ -1,7 +1,7 @@
 {
   "name": "@mqnoy/lolog",
   "description": "me and the logs.",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "author": "imza <qnoy.rifky@gmail.com>",
   "maintainers": [
     "imza <qnoy.rifky@gmail.com>"
@@ -16,7 +16,8 @@
     "build": "tsup src/index.ts",
     "example:basic": "tsx example/basic.ts",
     "example:defaultFormat": "tsx example/defaultFormat.ts",
-    "example:elasticFormat": "tsx example/elasticFormat.ts"
+    "example:elasticFormat": "tsx example/elasticFormat.ts",
+    "build:publish": "pnpm build && npm publish --access public"
   },
   "keywords": [
     "logging",
