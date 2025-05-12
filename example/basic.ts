@@ -32,6 +32,13 @@ class App {
       this.logger.error(error);
       this.logger.error(error, { requestId: "abc123", userId: "u456" });
     }
+
+    this.dummyFunc2();
+  };
+
+  dummyFunc2 = () => {
+    // expec no request.id
+    this.logger.debug("dummyFunc2");
   };
 }
 
