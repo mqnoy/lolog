@@ -11,6 +11,9 @@ importers:
       '@elastic/ecs-winston-format':
         specifier: ^1.5.3
         version: 1.5.3
+      flatted:
+        specifier: ^3.3.3
+        version: 3.3.3
       winston:
         specifier: ^3.17.0
         version: 3.17.0

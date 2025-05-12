@@ -1,6 +1,7 @@
 import { ecsFormat } from "@elastic/ecs-winston-format";
 import winston from "winston";
 import { isEcsError } from "./error.js";
+import { stringify } from "flatted";
 
 interface ElasticFormatConfig {
   convertErr?: boolean;
@@ -31,8 +32,7 @@ export const PrintfFormat = (): winston.Logform.Format => {
         ? error.stack_trace || error.stack
         : undefined;
 
-      const metaStr =
-        Object.keys(meta).length && `\nmeta: ${JSON.stringify(meta, null, 2)}`;
+      const metaStr = Object.keys(meta).length && `\nmeta: ` + stringify(meta);
 
       return `[${timestamp}] [${level.toUpperCase()}]: ${message}${
         stack ? `\n${stack}` : ""
