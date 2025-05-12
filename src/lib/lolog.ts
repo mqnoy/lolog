@@ -37,8 +37,10 @@ export class Lolog implements LologContract {
 
   getInstanceLog = () => this.logger;
 
-  setChild = (options: Object) => {
-    return this.logger.child(options);
+  setChild = (options: Object): LologContract => {
+    return new Lolog({
+      defaultMeta: { ...options },
+    });
   };
 
   log = (level: LogLevel, message: string, meta?: Record<string, unknown>) => {
