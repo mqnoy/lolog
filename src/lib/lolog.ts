@@ -51,16 +51,15 @@ export class Lolog implements LologContract {
     } as LogEntry);
   };
 
-  error(message: string | Error, meta?: Record<string, unknown>) {
+  error = (message?: string | Error, meta?: Record<string, unknown>) => {
     if (message instanceof Error) {
       this.log("error", message.message, {
         error: serializeError(message),
         ...meta,
       });
-    } else {
-      this.log("error", message, meta);
+      return;
     }
-  }
+  };
 
   warn(message: string, meta?: Record<string, unknown>) {
     this.log("warn", message, meta);
