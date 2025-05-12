@@ -9,7 +9,18 @@ interface LoggerOptions extends winston.LoggerOptions {
   // TODO: currently not used
   environment?: AppEnvironmentsType;
 }
-export class Lolog {
+
+interface LologContract {
+  getInstanceLog(): winston.Logger;
+  setChild(options: Object): LologContract;
+  log(level: LogLevel, message: string, meta?: Record<string, unknown>): void;
+  error(message: string | Error, meta?: Record<string, unknown>): void;
+  warn(message: string, meta?: Record<string, unknown>): void;
+  info(message: string, meta?: Record<string, unknown>): void;
+  debug(message: string, meta?: Record<string, unknown>): void;
+}
+
+export class Lolog implements LologContract {
   private logger: winston.Logger;
 
   constructor(options?: LoggerOptions) {
