@@ -1,2 +1,42 @@
+# Dependency directories
 node_modules/
-dist
+jspm_packages/
+
+# Build artifacts
+dist/
+build/
+*.tsbuildinfo
+
+# Debugging
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS related
+.DS_Store
+Thumbs.db
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Coverage
+coverage/
+.nyc_output/
+
+# Testing
+tests-results/
+
+# Temporary files
+tmp/
+temp/
